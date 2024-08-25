@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
-        String[][] board = new String[3][3];
+        String[][] board = new String[3][3];      //board initialize
         for(int i=0;i<board.length;i++){
             for (int j = 0; j < board.length; j++) {
                 board[i][j]="_";
@@ -17,7 +17,7 @@ public class Main {
     }
 
 
-    public static void printBoard(String[][] board){
+    public static void printBoard(String[][] board){                //printing board
         for(int i=0;i<board.length;i++){
             for (int j = 0; j < board.length; j++) {
                 if(i!=board.length-1)
@@ -35,16 +35,15 @@ public class Main {
 
    public static void turn(String[][]board){
         boolean turns = true;  //true means x turn otherwise o turn
-       boolean won=false;
        int x,y;
        Scanner sc= new Scanner(System.in);
-       int times=0;
+       int times=0;         //no of turns
 
        while( times<9) {
-           if (turns) {
+           if (turns) {                   
                System.out.print("X's Turn : ");
-               x = sc.nextInt();
-               y = sc.nextInt();
+               x = sc.nextInt();    //value of [x][]
+               y = sc.nextInt();    //value of [][y]
                update(board, x, y, "X");
                printBoard(board);
                wins(board ,"X");
@@ -68,15 +67,17 @@ public class Main {
    }
 
 
-   public static void update(String[][] board,int x,int y ,String val){
+   public static void update(String[][] board,int x,int y ,String val){  //update the board 
         board[x][y]=val;
    }
 
+//winning algoriithm
 
 
    public static void wins(String[][]board , String name){
+       //checking row and column win possibilities
         for(int i=0,j=0;i<board.length;i++){
-
+                
                 if(board[i][j].equals(board[i][j + 1]) && board[i][j + 2].equals(board[i][j]) && !board[i][j].equals("_") && !board[i][j + 1].equals("_") && !board[i][j + 2].equals("_")) {
                     winner(name);
                 }
@@ -84,6 +85,7 @@ public class Main {
                        winner(name);
 
         }
+       //for diagnol win possibilities
                 if(board[0][0].equals(board[1][1]) && board[1][1].equals(board[2][2]) && !board[1][1].equals("_"))
                     winner(name);
                 else if(board[0][2].equals(board[1][1]) && board[1][1].equals(board[2][0]) && !board[2][0].equals("_"))
@@ -92,11 +94,12 @@ public class Main {
 
 
    }
+    // winner appericiation
    public static void winner(String name){
 
             System.out.println("-----------Game Over-------------");
             System.out.println( "--------------Winner of the Game is " + name +" --------------" );
-            System.exit(0);
+            System.exit(0); // exit game
 
 
 
